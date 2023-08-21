@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
 import './App.css';
+import productImage from './C2-RowErg-01_1600.jpg';
 
 function SubscriptionApp() {
   const [sliderValue, setSliderValue] = useState(1);
   
   const stripePrices = {
-    1: "Preis für 24+ Monate",
-    2: "Preis für 12+ Monate",
-    3: "Preis für 6+ Monate",
-    4: "Preis für 3+ Monate"
+    1: "50€",
+    2: "45€",
+    3: "40€",
+    4: "35€"
+  };
+
+  const stripeDurations = {
+    1: "24+ Monate",
+    2: "12+ Monate",
+    3: "6+ Monate",
+    4: "3+ Monate"
   };
   
   const stripeLinks = {
@@ -27,32 +35,31 @@ function SubscriptionApp() {
   };
 
   return (
-    <div style={{ width: '100%' }}>
-      <label><b>Mietoption</b></label>
+    <div className="subscription-container">
+      <img src={productImage} alt="Produktbild" className="product-image"/>
+      <h2 className="product-name">RowErg Produkt</h2>
       <input 
         type="range" 
         min="1" 
         max="4" 
         value={sliderValue} 
         onChange={handleSliderChange} 
-        style={{ 
-          width: '100%', 
-          borderRadius: '20px', 
-          border: '4px solid black', 
-          outline: 'none', 
-          appearance: 'none',
-          '--value': sliderValue
-        }}
         className="custom-slider"
       />
 
-      <div id="mietdauer-labels">
-        {`Mindestmietdauer: ${stripePrices[sliderValue]}`}
+      <div className="output-container">
+        <div className="output">
+          <label>Mietpreis:</label>
+          <span>{stripePrices[sliderValue]} mtl. inkl. MwSt.</span>
+        </div>
+
+        <div className="output">
+          <label>Mindestmietdauer:</label>
+          <span>{stripeDurations[sliderValue]}</span>
+        </div>
       </div>
-      <div>
-        {stripePrices[sliderValue]} mtl. inkl. MwSt.
-      </div>
-      <button onClick={handleRent} style={{ marginTop: '10px' }}>Mieten</button>
+
+      <button onClick={handleRent} className="rent-button">Mieten</button>
     </div>
   );
 }
